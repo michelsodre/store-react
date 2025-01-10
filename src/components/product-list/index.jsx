@@ -28,7 +28,6 @@ function ProductList() {
     };
     fetchProducts();
   }, []);
-  console.log(products);
 
   if (loading) {
     return <h1>Carregando</h1>;
