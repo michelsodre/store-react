@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 //Components
 import Cart from "../cart";
 import Auth from "../auth";
@@ -12,11 +13,13 @@ function Header() {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
   const handleLoginClick = () => setIsOpenLogin(!isOpenLogin);
 
+  const { user } = useSelector((rootReducer) => rootReducer.userReducer);
+  console.log(user);
   return (
     <Styles.Container>
       <Styles.Logo>React Shop</Styles.Logo>
       <Styles.Buttons>
-        <div onClick={handleLoginClick}>Login</div>
+        {user ? <div>Sair</div> : <div onClick={handleLoginClick}>Login</div>}
         <div onClick={handleCartClick}>Cart</div>
       </Styles.Buttons>
       <Auth isOpenLogin={isOpenLogin} setIsOpenLogin={setIsOpenLogin} />
