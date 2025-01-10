@@ -1,8 +1,8 @@
 //Components
 import Header from "./components/header";
-
-import "./App.css";
 import ProductList from "./components/product-list";
+//Styles
+import "./App.css";
 
 function App() {
   return (
