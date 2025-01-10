@@ -20,7 +20,6 @@ function ProductList() {
         const data = await response.json();
         setProducts(data.products);
         setLoading(false);
-        console.log(products);
       } catch (error) {
         setError(error);
         setLoading(false);
