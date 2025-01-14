@@ -1,7 +1,6 @@
 import React, { act, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UserActionTypes from "../../redux/user/action-types";
-
+import { logoutUser } from "../../redux/user/actions";
 //Components
 import Cart from "../cart";
 import Auth from "../auth";
@@ -18,9 +17,8 @@ function Header() {
   const { user } = useSelector((rootReducer) => rootReducer.userReducer);
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch({ type: UserActionTypes.LOGOUT });
+    dispatch(logoutUser());
   };
-  console.log(user);
   return (
     <Styles.Container>
       <Styles.Logo>React Shop</Styles.Logo>

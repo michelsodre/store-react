@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import UserActionTypes from "../../redux/user/action-types";
+import { loginUser } from "../../redux/user/actions";
 //Styles
 import * as Styles from "./styles";
 
@@ -11,7 +11,7 @@ const Auth = ({ isOpenLogin, setIsOpenLogin }) => {
     event.preventDefault();
     const email = event.target.elements.email.value;
     const password = event.target.elements.password.value;
-    dispatch({ type: UserActionTypes.LOGIN, payload: email });
+    dispatch(loginUser({ email, password }));
     setIsOpenLogin(false);
   }
 
