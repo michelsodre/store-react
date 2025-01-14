@@ -1,4 +1,4 @@
-import React, { act, useState } from "react";
+import React, { act, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/user/actions";
 //Components
@@ -15,6 +15,12 @@ function Header() {
   const handleLoginClick = () => setIsOpenLogin(!isOpenLogin);
 
   const { user } = useSelector((rootReducer) => rootReducer.userReducer);
+  const { products } = useSelector((rootReducer) => rootReducer.cartReducer);
+
+  const producstCount = useMemo(() => {
+    return products.reduce((acc, product) => acc + product.quantity, 0);
+  }, [products]);
+
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -28,7 +34,7 @@ function Header() {
         ) : (
           <div onClick={handleLoginClick}>Login</div>
         )}
-        <div onClick={handleCartClick}>Cart</div>
+        <div onClick={handleCartClick}>Cart ({producstCount})</div>
       </Styles.Buttons>
       <Auth isOpenLogin={isOpenLogin} setIsOpenLogin={setIsOpenLogin} />
       <Cart isOpen={isOpenCart} setIsOpen={setIsOpenCart} />
