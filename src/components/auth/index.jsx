@@ -6,17 +6,27 @@ import * as Styles from "./styles";
 const Auth = ({ isOpenLogin, setIsOpenLogin }) => {
   const handleEscapeAreaClick = () => setIsOpenLogin(false);
   const dispatch = useDispatch();
-  const handleAuthClick = () => {
-    dispatch({ type: UserActionTypes.LOGIN, payload: 40 });
-  };
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    const email = event.target.elements.email.value;
+    const password = event.target.elements.password.value;
+    dispatch({ type: UserActionTypes.LOGIN, payload: email });
+    setIsOpenLogin(false);
+  }
+
   return (
     <Styles.Container isOpenLogin={isOpenLogin}>
       <Styles.AuthEscapeArea onClick={handleEscapeAreaClick} />
-      <Styles.Form onSubmit={(e) => e.preventDefault()}>
+      <Styles.Form onSubmit={(e) => handleSubmit(e)}>
         <Styles.FormTitle>Login</Styles.FormTitle>
-        <Styles.FormInput placeholder="Email" />
-        <Styles.FormInput placeholder="Password" type="password" />
-        <Styles.FormButton onClick={handleAuthClick}>Login</Styles.FormButton>
+        <Styles.FormInput type="text" name="email" placeholder="Email" />
+        <Styles.FormInput
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+        <Styles.FormButton>Login</Styles.FormButton>
       </Styles.Form>
     </Styles.Container>
   );
