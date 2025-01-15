@@ -14,7 +14,7 @@ const Cart = ({ isOpen, setIsOpen }) => {
       <Styles.CartEscapeArea onClick={handleEscapeAreaClick} />
       <Styles.CartContent>
         <Styles.CartTitle>Your Cart</Styles.CartTitle>
-        <p>R$ {CartTotal}</p>
+        <Styles.CartTitle>Total: R$ {CartTotal}</Styles.CartTitle>
         {products.map((product) => (
           <CartItem key={product.id} product={product} />
         ))}
