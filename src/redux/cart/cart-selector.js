@@ -4,3 +4,10 @@ export const selectCartProducts = (rootReducer) => {
     0
   );
 };
+
+export const selectCartTotal = (rootReducer) => {
+  return rootReducer.cartReducer.products.reduce(
+    (acc, product) => acc + product.price * product.quantity,
+    0
+  );
+};
