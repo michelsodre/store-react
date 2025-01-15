@@ -33,6 +33,30 @@ const cartReducer = (state = initialState, action) => {
         ),
         productsTotalPrice: state.productsTotalPrice - action.payload.price,
       };
+    case CartActionTypes.INCREASE_QUANTITY:
+      return {
+        ...state,
+        products: state.products.map((product) => {
+          if (product.id === action.payload) {
+            return { ...product, quantity: product.quantity + 1 };
+          }
+          return product;
+        }),
+        productsTotalPrice: state.productsTotalPrice + action.payload.price,
+      };
+    case CartActionTypes.DECREASE_QUANTITY:
+      return {
+        ...state,
+        products: state.products
+          .map((product) => {
+            if (product.id === action.payload) {
+              return { ...product, quantity: product.quantity - 1 };
+            }
+            return product;
+          })
+          .filter((product) => product.quantity > 0),
+        productsTotalPrice: state.productsTotalPrice - action.payload.price,
+      };
     default:
       return state;
   }
