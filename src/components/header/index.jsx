@@ -6,6 +6,7 @@ import Cart from "../cart";
 import Auth from "../auth";
 //Styles
 import * as Styles from "./styles";
+import { selectCartProducts } from "../../redux/cart/cart-selector";
 
 function Header() {
   const [isOpenCart, setIsOpenCart] = useState(false);
@@ -17,9 +18,10 @@ function Header() {
   const { user } = useSelector((rootReducer) => rootReducer.userReducer);
   const { products } = useSelector((rootReducer) => rootReducer.cartReducer);
 
-  const producstCount = useMemo(() => {
-    return products.reduce((acc, product) => acc + product.quantity, 0);
-  }, [products]);
+  const producstCount = useSelector(selectCartProducts);
+  // const producstCount = useMemo(() => {
+  //   return products.reduce((acc, product) => acc + product.quantity, 0);
+  // }, [products]);
 
   const dispatch = useDispatch();
   const handleLogout = () => {
